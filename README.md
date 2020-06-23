@@ -16,7 +16,7 @@ cd grok_exporter-1.0.0.RC3.linux-amd64/
 ``` 
 ### Passo 2: Configurar arquivo config.yml
 O arquivo encontra-se por padrão dentro da pasta "example". Entrar no diretório example e substituir o arquivo config.yml com o exemplo abaixo:
-
+*obs: A identação é importante para o funcionamento. Verifique!*
 ```
 global:
   config_version: 3
