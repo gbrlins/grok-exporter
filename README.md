@@ -80,8 +80,7 @@ Nesse momento, já será possível verificar que o Prometheus está recebendo as
 ### Passo 7: Criando uma dash no Grafana
 Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique livre para criar, ou importe uma dashboard padrão para exemplo (serão necessárias algumas adequações. No símbolo de + (Create) > Import > Or paste JSON . Colar o seguinte JSON:
 
-```
-{
+```{
   "annotations": {
     "list": [
       {
@@ -99,9 +98,96 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1592921943769,
+  "iteration": 1592933943815,
   "links": [],
   "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "usb_activity{instance=~\"$maquina\"} - usb_activity{instance=~\"$maquina\"} offset 1m",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{device}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Estado atual",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
     {
       "cacheTimeout": null,
       "columns": [
@@ -113,10 +199,10 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       "datasource": "Prometheus",
       "fontSize": "100%",
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 2,
       "links": [],
@@ -142,6 +228,7 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
           "link": false,
           "mappingType": 2,
           "pattern": "Current",
+          "preserveFormat": false,
           "rangeMaps": [
             {
               "from": "1",
@@ -168,11 +255,11 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       ],
       "targets": [
         {
-          "expr": "usb_activity{instance='$maquina'} > usb_activity{instance='$maquina'} offset 1m ",
+          "expr": "usb_activity{instance=~\"$maquina\"} > usb_activity{instance=~\"$maquina\"} offset 1m ",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{dispositivo}}",
+          "legendFormat": "{{device}}",
           "refId": "A"
         }
       ],
@@ -193,10 +280,10 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       "datasource": "Prometheus",
       "fontSize": "100%",
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 8
       },
       "id": 3,
       "links": [],
@@ -249,11 +336,11 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       ],
       "targets": [
         {
-          "expr": "usb_activity{instance='$maquina'} == usb_activity{instance='$maquina'} offset 1m ",
+          "expr": "usb_activity{instance=~\"$maquina\"} == usb_activity{instance=~\"$maquina\"} offset 1m ",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{dispositivo}}",
+          "legendFormat": "{{device}}",
           "refId": "A"
         }
       ],
@@ -264,7 +351,7 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       "type": "table"
     }
   ],
-  "refresh": "1m",
+  "refresh": "5s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
@@ -273,69 +360,22 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "sled.virtnet:9144",
-          "value": "sled.virtnet:9144"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "Prometheus",
         "definition": "up",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Server",
         "multi": false,
         "name": "maquina",
-        "options": [
-          {
-            "selected": false,
-            "text": "192.168.12.3:9100",
-            "value": "192.168.12.3:9100"
-          },
-          {
-            "selected": false,
-            "text": "192.168.12.10:9100",
-            "value": "192.168.12.10:9100"
-          },
-          {
-            "selected": true,
-            "text": "sled.virtnet:9144",
-            "value": "sled.virtnet:9144"
-          },
-          {
-            "selected": false,
-            "text": "suma.virtnet:5556",
-            "value": "suma.virtnet:5556"
-          },
-          {
-            "selected": false,
-            "text": "suma.virtnet:5557",
-            "value": "suma.virtnet:5557"
-          },
-          {
-            "selected": false,
-            "text": "suma.virtnet:80",
-            "value": "suma.virtnet:80"
-          },
-          {
-            "selected": false,
-            "text": "suma.virtnet:9100",
-            "value": "suma.virtnet:9100"
-          },
-          {
-            "selected": false,
-            "text": "suma.virtnet:9187",
-            "value": "suma.virtnet:9187"
-          },
-          {
-            "selected": false,
-            "text": "suma.virtnet:9800",
-            "value": "suma.virtnet:9800"
-          }
-        ],
+        "options": [],
         "query": "up",
-        "refresh": 0,
-        "regex": "/.*instance=\"([^\"]*).*/",
+        "refresh": 1,
+        "regex": "/.*instance=\"([^\"]*),*/",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 2,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -345,7 +385,7 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-2m",
     "to": "now"
   },
   "timepicker": {
@@ -376,7 +416,7 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
   "timezone": "",
   "title": "USB",
   "uid": "Rw1IuzWGk",
-  "version": 4
+  "version": 33
 }
 ```
 
