@@ -388,6 +388,7 @@ Para criar uma variável:
 Clicar em "Dashboard settings" (canto superior direito, no símbolo de engrenagem) e selecionar a aba "Variables"
 Clicando em "New", abrirá a página de configuração. Copiar como mostra a imagem abaixo:
 
+![Screenshot_20200623_114217](https://user-images.githubusercontent.com/22751679/85417988-a5124e80-b546-11ea-94c2-84c13762303f.png)
 
 
 Em "Regex" = /.*instance="([^"]*),*/
