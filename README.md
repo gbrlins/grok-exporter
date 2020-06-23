@@ -33,7 +33,7 @@ metrics:
   match: '%{DEVICE:device}'
   cumulative: false
   labels:
-      dispositivo: '{{.device}}'
+      device: '{{.device}}'
 server:
   protocol: http
   port: 9144
