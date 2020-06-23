@@ -5,7 +5,7 @@ Documentação disponível em https://github.com/fstab/grok_exporter
 O exemplo foi feito em um host conectado ao SUSE Manager com o Grafana e Prometheus instalado através de formulas do SUMA.
 Caso não seja a sua situação, será necessário baixar e configurar o Grafana e Prometheus antes de iniciar o passo-a-passo.
 
-## Passo 1: Baixar grok_exporter
+### Passo 1: Baixar grok_exporter
 ```
 wget https://github.com/fstab/grok_exporter/releases/download/v1.0.0.RC3/grok_exporter-1.0.0.RC3.linux-amd64.zip
 ```
