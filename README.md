@@ -21,14 +21,14 @@ O arquivo encontra-se por padrão dentro da pasta "example". Entrar no diretóri
 global:
   config_version: 3
 input:
-  type: file #stdin não funcionando ainda 
-  path: ./example/usb_devices.log
+  type: file
+  path: ./example/example.log
   readall: true
 grok_patterns:
 - 'DEVICE [^=]*$'
 metrics:
 - type: counter
-  name: dispositivos_usb_conectados
+  name: usb_activity
   help: Exibe se um dispositivo USB está conectado ou não
   match: '%{DEVICE:device}'
   cumulative: false
@@ -168,7 +168,7 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       ],
       "targets": [
         {
-          "expr": "dispositivos_usb_conectados{instance='$maquina'} > dispositivos_usb_conectados{instance='$maquina'} offset 1m ",
+          "expr": "usb_activity{instance='$maquina'} > usb_activity{instance='$maquina'} offset 1m ",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -249,7 +249,7 @@ Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique l
       ],
       "targets": [
         {
-          "expr": "dispositivos_usb_conectados{instance='$maquina'} == dispositivos_usb_conectados{instance='$maquina'} offset 1m ",
+          "expr": "usb_activity{instance='$maquina'} == usb_activity{instance='$maquina'} offset 1m ",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
