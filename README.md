@@ -1,6 +1,6 @@
 # Monitorando dispositivos com o grok-exporter
 
-Documentação disponível em https://github.com/fstab/grok_exporter
+*Documentação disponível em https://github.com/fstab/grok_exporter*
 
 O exemplo foi feito em um host conectado ao SUSE Manager com o Grafana e Prometheus instalado através de formulas do SUMA.
 Caso não seja a sua situação, será necessário baixar e configurar o Grafana e Prometheus antes de iniciar o passo-a-passo.
