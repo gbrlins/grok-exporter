@@ -63,7 +63,7 @@ Nesse momento, já será possível verificar que o Prometheus está recebendo as
 ### Passo 7: Criando uma dash no Grafana
 Dentro do Grafana, já é possível criar os gráficos de monitoramento. Fique livre para criar, ou importe uma dashboard padrão (disponível aqui nesse link: <a href="https://github.com/gbrlins/grok-exporter/blob/master/dashboard.json">dashboard.json</a>).
 
-No símbolo de + (Create) > Import > Or paste JSON . Colar o conteúdo do <a href="https://github.com/gbrlins/grok-exporter/blob/master/dashboard.json">dashboard.json</a>seguinte JSON: 
+No símbolo de + (Create) > Import > Or paste JSON . Colar o conteúdo do <a href="https://github.com/gbrlins/grok-exporter/blob/master/dashboard.json">dashboard.json</a>. 
 
 ### Passo 8: Configurar variáveis no Grafana
 
