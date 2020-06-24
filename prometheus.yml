@@ -1,0 +1,60 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+
+rule_files:
+
+  - /etc/prometheus/rules/general-rules.yml
+  - /etc/prometheus/rules/prometheus-rules.yml
+
+
+# Scrape configurations
+scrape_configs:
+  # --------------------
+  # Monitor suma4.virtnet
+  # --------------------
+  - job_name: 'mgr-server'
+    static_configs:
+      - targets:
+        - suma4.virtnet:9100 # Node exporter
+        - suma4.virtnet:5556 # Tomcat JMX
+        - suma4.virtnet:5557 # Taskomatic JMX
+        - suma4.virtnet:9800 # Uyuni server exporter
+        labels: {}
+      - targets:
+        - suma4.virtnet:80 # Message queue
+        labels:
+          __metrics_path__: /rhn/metrics
+      - targets:
+        - suma4.virtnet:9187 # PostgresSQL
+        labels:
+          role: postgres
+  - job_name: 'grok'
+    static_configs:
+      - targets:
+        - localhost:9144 #grok_exporter
+        labels:
+          role: grok-exporter
+
+
+  # --------------------
+  # Auto discover clients of suma4.virtnet
+  # --------------------
+  - job_name: 'mgr-clients'
+    uyuni_sd_configs:
+      - host: https://suma4.virtnet
+        username: admin
+        password: {PASSWORD}
+  # --------------------
+  # Metamonitoring
+  # --------------------
+  - job_name: prometheus
+    static_configs:
+      - targets:
+        - dns:9090
