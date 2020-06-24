@@ -1,8 +1,8 @@
 global:
   config_version: 3
 input:
-  type: file #stdin
-  path: ./example/example2.log
+  type: file
+  path: ./example/example.log
   readall: true
 grok:
   patterns_dir: ./patterns
