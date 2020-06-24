@@ -50,7 +50,7 @@ systemctl restart prometheus.service
 ```
 
 ### Passo 5: Start no serviço do grok
-Dentro do diretório do grok_exporter, rodar o seguinte comando para iniciar o serviço do grok_eporter:
+Dentro do diretório do grok_exporter (fora de qualquer pasta), rodar o seguinte comando para iniciar o serviço do grok_eporter:
 ```
 ./grok_exporter -config ./example/config-file.yml
 ```
