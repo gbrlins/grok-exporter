@@ -1,0 +1,21 @@
+global:
+  config_version: 3
+input:
+  type: file #stdin
+  path: ./example/example2.log
+  readall: true
+grok:
+  patterns_dir: ./patterns
+grok_patterns:
+  - 'DEVICE [^=]*$'
+metrics:
+- type: counter
+  name: usb_activity
+  help: Exibe se um dispositivo USB está conectado ou não
+  match: '%{DEVICE:device}'
+  cumulative: false
+  labels:
+      device: '{{.device}}'
+server:
+  protocol: http
+  port: 9144
