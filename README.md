@@ -16,31 +16,9 @@ unzip grok_exporter-1.0.0.RC3.linux-amd64.zip
 cd grok_exporter-1.0.0.RC3.linux-amd64/
 ``` 
 ### Passo 2: Configurar arquivo config.yml
-O arquivo encontra-se por padrão dentro da pasta "example". Entrar no diretório example e substituir o arquivo config-file.yml pelo conteúdo abaixo, ou copie o conteúdo do arquivo <a href="https://github.com/gbrlins/grok-exporter/blob/master/config-file.yml">config.yml</a>
+O arquivo encontra-se por padrão dentro da pasta "example". Entrar no diretório example e substituir o arquivo config-file.yml pelo conteúdo do arquivo <a href="https://github.com/gbrlins/grok-exporter/blob/master/config-file.yml">config.yml</a>
 
 *obs: A identação é importante para o funcionamento. Verifique!*
-
-```
-global:
-  config_version: 3
-input:
-  type: file
-  path: ./example/example.log
-  readall: true
-grok_patterns:
-- 'DEVICE [^=]*$'
-metrics:
-- type: counter
-  name: usb_activity
-  help: Exibe se um dispositivo USB está conectado ou não
-  match: '%{DEVICE:device}'
-  cumulative: false
-  labels:
-      device: '{{.device}}'
-server:
-  protocol: http
-  port: 9144
-```
 
 ### Passo 3: Criar uma entrada na crontab
 Com o comando crontab -e, adicionar a seguinte entrada na cron (lembrar de alterar para o caminho correto):
@@ -54,7 +32,7 @@ Com o comando crontab -e, adicionar a seguinte entrada na cron (lembrar de alter
 ```
 vim /etc/prometheus/prometheus.yml
 ```
-Adicionar em seu arquivo de configuração, dentro de scrape_configs a seguinte entrada:
+Adicionar em seu arquivo de configuração, dentro de scrape_configs o seguinte bloco de entrada:
 
 ```
   - job_name: 'grok'
@@ -64,8 +42,9 @@ Adicionar em seu arquivo de configuração, dentro de scrape_configs a seguinte 
         labels:
           role: grok-exporter
 ```
-O resultado final deve ficar parecido com o exemplo <a href="https://github.com/gbrlins/grok-exporter/blob/master/prometheus.yml">prometheus.yml</a> 
-Salvar o arquivo e restartar o Prometheus:
+Observe no arquivo exemplo <a href="https://github.com/gbrlins/grok-exporter/blob/master/prometheus.yml">prometheus.yml</a> a presença desse segmento e certifique de preservar a identação. 
+
+Após editado, salvar o arquivo e restartar o Prometheus:
 ```
 systemctl restart prometheus.service
 ```
