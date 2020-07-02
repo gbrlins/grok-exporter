@@ -2,7 +2,7 @@ global:
   config_version: 3
 input:
   type: file
-  path: ./example/example.log
+  path: ./example/usb_activity.log
   readall: true
 grok:
   patterns_dir: ./patterns
